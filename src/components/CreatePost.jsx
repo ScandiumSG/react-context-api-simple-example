@@ -2,17 +2,16 @@ import { useState, useContext } from "react";
 import { SoMeContext } from '../App'
 
 
-const INITIAL_POST = {
-    title: '',
-    content: '',
+const readStoredPost = () => {
+  return ({
+    title: localStorage.getItem("title") || "",
+    content: localStorage.getItem("content") || ""
+  })
 }
 
 export default function CreatePost() {
     const { posts, setPosts } = useContext(SoMeContext)
-    const [post, setPost] = useState({
-      title: localStorage.getItem("title") || "",
-      content: localStorage.getItem("content") || ""
-    })
+    const [post, setPost] = useState(readStoredPost)
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -26,8 +25,8 @@ export default function CreatePost() {
     const handleSubmit = (e) => {
         e.preventDefault()
         setPosts([...posts, post])
-        setPost(INITIAL_POST)
         localStorage.clear()
+        setPost(readStoredPost)
     }
 
     return (
