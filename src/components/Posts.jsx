@@ -1,4 +1,9 @@
-export default function Posts({ posts }) {
+import { useContext } from 'react'
+import { SoMeContext } from '../App'
+
+export default function Posts() {
+    const { posts } = useContext(SoMeContext)
+
     return (
         <>
             {posts.map(post => {

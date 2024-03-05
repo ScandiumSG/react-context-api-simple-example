@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import CreatePost from './components/CreatePost.jsx';
 import Header from './components/Header.jsx'
 import Posts from './components/Posts.jsx'
 import './App.css'
 
+
+export const SoMeContext = createContext()
 const APP_NAME = 'Next-gen Social Media'
 
 function App() {
@@ -14,9 +16,13 @@ function App() {
 
     return (
         <>
-            <Header appName={APP_NAME} />
-            <CreatePost posts={posts} setPosts={setPosts} />
-            <Posts posts={posts} />
+        <SoMeContext.Provider
+            value={{appName: APP_NAME, posts: posts, setPosts: setPosts}}
+        >
+            <Header/>
+            <CreatePost/>
+            <Posts/>
+        </SoMeContext.Provider>
         </>
     )
 }
